@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  postgresql:
+    image: postgres:13
+    container_name: postgresql
+    restart: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pookieDB
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "auth"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: on-failure
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - 5050:80
+    depends_on:
+      - postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pgadmin --ping"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
