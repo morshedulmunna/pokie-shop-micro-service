@@ -17,8 +17,8 @@ model History {
     id             String     @id @default(cuid())
     actionType     ActionType
     quantityChange Int
-    lastQuentity   Int
-    newQuentity    Int
+    lastQuantity   Int
+    newQuantity    Int
     inventory      Inventory  @relation(fields: [inventoryId], references: [id])
     inventoryId    String
     createdAt      DateTime   @default(now())
