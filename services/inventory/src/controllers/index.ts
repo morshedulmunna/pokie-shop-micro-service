@@ -1,1 +1,1 @@
-export { default as createInventory } from "./createInventory";
+export { default as createInventoryService } from "./createInventory";

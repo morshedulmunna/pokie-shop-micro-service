@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
+import { createInventoryService } from "./controllers";
 dotenv.config();
 
 const app = express();
@@ -10,9 +11,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
+// Route
+app.post("/inventory", createInventoryService);
+
 // 404 handler
 app.use((_req: express.Request, res: express.Response) => {
-  res.status(404).send("Not found");
+  res.status(404).send({
+    message: "Not found",
+  });
 });
 
 // Error handler

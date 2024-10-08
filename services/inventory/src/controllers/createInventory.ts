@@ -6,7 +6,7 @@ const createInventory = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void | any> => {
   try {
     const parseBody = InventoryCreateDTOSchema.safeParse(req.body);
     if (!parseBody.success) {
