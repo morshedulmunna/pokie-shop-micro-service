@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
-import { createInventoryService } from "./controllers";
+import { createInventoryService, updateInventoryService } from "./controllers";
 import errorHandler from "./utils";
 dotenv.config();
 
@@ -14,6 +14,8 @@ app.use(morgan("dev"));
 
 // Route
 app.post("/inventory", createInventoryService);
+app.put("/inventory-update/:id", updateInventoryService);
+
 // Use the error-handling middleware
 app.use(errorHandler);
 // 404 handler
