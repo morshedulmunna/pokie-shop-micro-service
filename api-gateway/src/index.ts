@@ -4,6 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import { configureRoutes } from "./utils";
 dotenv.config();
 
 const app = express();
@@ -28,6 +29,8 @@ app.use("/api", limiter);
 //request logger
 app.use(morgan("dev"));
 app.use(express.json());
+
+configureRoutes(app);
 
 //TODO: Auth Middleware
 
