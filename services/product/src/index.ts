@@ -2,9 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
+dotenv.config();
 
 import errorHandler from "./utils";
-dotenv.config();
+import { CreateProduct } from "./controllers";
 
 const app = express();
 app.use(cors());
@@ -13,6 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 // Route
+
+app.post("/create-product", CreateProduct);
 
 // Use the error-handling middleware
 app.use(errorHandler);
