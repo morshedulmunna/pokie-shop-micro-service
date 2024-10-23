@@ -18,10 +18,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 // Route
-app.put("/inventory-update/:id", updateInventoryService);
-app.post("/inventory", createInventoryService);
-app.get("/inventory", getInventory);
-app.get("/inventory/:id", getInventoryByIdService);
+app.post("/inventories", createInventoryService);
+app.get("/inventories", getInventory);
+app.put("/inventories/:id", updateInventoryService);
+app.get("/inventories/:id", getInventoryByIdService);
 // Use the error-handling middleware
 app.use(errorHandler);
 // 404 handler
