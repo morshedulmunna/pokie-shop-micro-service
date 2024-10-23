@@ -40,13 +40,14 @@ const createProduct = async (
 
       try {
         // Call the external inventory service
-        const { data: inventory } = await axios.post(
-          `${INVENTORY_URL}/inventory`,
-          {
-            productId: product.id,
-            sku: product.sku,
-          }
-        );
+        const {
+          data: { inventory },
+        } = await axios.post(`${INVENTORY_URL}/inventory`, {
+          productId: product.id,
+          sku: product.sku,
+        });
+
+        console.log(inventory);
 
         // Update the product with the inventory ID
         await prisma.product.update({
@@ -59,11 +60,10 @@ const createProduct = async (
         });
 
         return {
-          product,
+          ...product,
           inventoryId: inventory.id,
         };
       } catch (inventoryError) {
-        console.log(inventoryError);
         // If the inventory request fails, throw an error to trigger transaction rollback
         throw new Error("Failed to create inventory entry");
       }

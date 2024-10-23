@@ -5,7 +5,7 @@ import morgan from "morgan";
 dotenv.config();
 
 import errorHandler from "./utils";
-import { CreateProduct } from "./controllers";
+import { CreateProduct, GetProduct } from "./controllers";
 
 const app = express();
 app.use(cors());
@@ -16,6 +16,7 @@ app.use(morgan("dev"));
 // Route
 
 app.post("/create-product", CreateProduct);
+app.get("/get-products", GetProduct);
 
 // Use the error-handling middleware
 app.use(errorHandler);
