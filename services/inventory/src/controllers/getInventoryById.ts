@@ -8,6 +8,9 @@ const getInventoryById = async (
   try {
     const inventory = await prisma.inventory.findUnique({
       where: { id: req.params.id },
+      include: {
+        histories: true,
+      },
     });
 
     if (!inventory) {

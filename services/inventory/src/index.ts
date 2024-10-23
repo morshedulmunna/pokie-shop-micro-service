@@ -4,6 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 import {
   createInventoryService,
+  getInventory,
   getInventoryByIdService,
   updateInventoryService,
 } from "./controllers";
@@ -19,8 +20,8 @@ app.use(morgan("dev"));
 // Route
 app.put("/inventory-update/:id", updateInventoryService);
 app.post("/inventory", createInventoryService);
-app.get("/inventory", getInventoryByIdService);
-
+app.get("/inventory", getInventory);
+app.get("/inventory/:id", getInventoryByIdService);
 // Use the error-handling middleware
 app.use(errorHandler);
 // 404 handler
